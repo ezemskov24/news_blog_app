@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  News with tag: {{ tag }}
+{% endblock %}
+
+{% block body %}
+  <h1>News with tag: {{ tag }}</h1>
+  {% if news %}
+    <div>
+      {% for i_news in news %}
+        <div>
+          <p>
+            <a href="{% url 'news:news_details' pk=i_news.pk %}">
+              {{ i_news.title }}
+            </a>
+          </p>
+          <p>{{ i_news.text|truncatewords:30 }}</p>
+        </div>
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No news available for this tag.</p>
+  {% endif %}
+{% endblock %}

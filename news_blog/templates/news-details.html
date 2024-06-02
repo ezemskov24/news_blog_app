@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  News {{ news.title }}
+{% endblock %}
+
+{% block body %}
+  <h1><strong>{{ news.title }}</strong></h1>
+    <div>
+        <div>{{ news.text }} </div>
+
+        <div>
+          {% if news.image %}
+            <div>
+              <img src="{{ news.image.url }}" alt="{{ news.title }}">
+            </div>
+          {% endif %}
+        </div>
+
+        <div>
+          {% if news.tags.exists %}
+            <ul>
+              {% for tag in news.tags.all %}
+                <li>{{ tag.name }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        <div>Created at: {{ news.created_at }}</div>
+    </div>
+
+  <div>
+    <button id="like-btn" {% if user_liked_news %}disabled{% endif %}>Like</button>
+    <button id="dislike-btn" {% if user_disliked_news %}disabled{% endif %}>Dislike</button>
+    <span id="like-count">{{ news.likes }}</span>
+  </div>
+
+  <script>
+      const newsPk = "{{ news.pk }}";
+      const csrfToken = "{{ csrf_token }}";
+      const userLikedNews = "{{ user_liked_news }}";
+      const userDislikedNews = "{{ user_disliked_news }}";
+  </script>
+  <script src="{% static 'assets/js/like_script.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  News Statistics
+{% endblock %}
+
+{% block body %}
+  <h1>News Statistics</h1>
+  {% if news_statistics %}
+    <ul>
+      {% for statistic in news_statistics %}
+        <li>{{ statistic }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No news statistics available.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  News
+{% endblock %}
+
+{% block body %}
+  <div id="news-container">
+    {% for i_news in news %}
+      <div class="news-item">
+        <p>
+          <a href="{{ i_news.get_absolute_url }}">
+            {{ i_news.title }}
+          </a>
+        </p>
+        <p>{{ i_news.text|truncatewords:30 }}</p>
+        <p>
+          Tags:
+          {% for tag in i_news.tags.all %}
+            <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+              {% if not forloop.last %}
+        <hr>
+      {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="{% static 'assets/js/infinite_scroll.js' %}"></script>
+{% endblock %}
