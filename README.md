@@ -17,6 +17,11 @@
 ```
 git clone https://github.com/ezemskov24/zavod-it_test_task.git
 ```
+Установить зависимости командой:
+
+```
+pip install -r requirements.txt
+```
 ***
 ### Запуск проекта локально
 
